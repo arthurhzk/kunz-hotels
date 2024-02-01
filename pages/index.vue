@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 class="text-center text-2xl mb-8">Dashboard</h1>
+    <h1 class="text-center text-2xl my-8">Dashboard</h1>
     <div
       class="flex flex-col md:flex-row md:items-center md:justify-center gap-4"
     >

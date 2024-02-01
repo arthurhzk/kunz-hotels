@@ -1,5 +1,5 @@
 <template>
-  <section class="w-1/2 ml-10 mt-10">
+  <section class="w-1/2 md:w-1/4 ml-10 mt-10">
     <UVerticalNavigation :links="links" />
   </section>
 </template>
@@ -16,7 +16,7 @@ interface Link {
 }
 const links: Link[] = [
   {
-    label: "Profile",
+    label: "Perfil",
     avatar: {
       src: "https://avatars.githubusercontent.com/u/739984?v=4",
     },
@@ -36,7 +36,7 @@ const links: Link[] = [
   {
     label: "Cabanas",
     icon: "i-heroicons-command-line",
-    to: "/components/command-palette",
+    to: "/cabins",
   },
   {
     label: "Hóspedes",
