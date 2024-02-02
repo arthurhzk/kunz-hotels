@@ -12,10 +12,11 @@
           class="h-8"
           alt="Flowbite Logo"
         />
-        <span
-          class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
-          >Gerenciamento de Cabanas</span
+        <h1
+          class="mb-4 text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white"
         >
+          Seleção de cabanas
+        </h1>
       </a>
       <button>
         <svg
