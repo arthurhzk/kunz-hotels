@@ -24,7 +24,7 @@
           </svg>
         </div>
 
-        <UInput v-model="searchGuest" />
+        <UInput v-model="modifiedInput" />
       </div>
     </div>
 
@@ -104,8 +104,16 @@ const columns = [
 
 const searchGuest = ref("");
 
+const modifiedInput = computed({
+  get: () => searchGuest.value,
+  set: (value: string) => {
+    const newValue = value.trim();
+    searchGuest.value = newValue;
+  },
+});
+
 const searchGuestByName = computed(() => {
-  if (searchGuest.value.length < 3) {
+  if (modifiedInput.value.length < 3) {
     return guests.value;
   } else {
     return guests.value.filter((guest: { fullName: string }) => {
