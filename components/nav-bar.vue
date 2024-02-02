@@ -18,7 +18,6 @@
         >
       </a>
       <button>
-        <span class="sr-only">Open main menu</span>
         <svg
           @click="toggleNavBar"
           class="w-5 h-5 mt-10 md:hidden"

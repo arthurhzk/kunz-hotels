@@ -9,7 +9,7 @@
           :title="card.title"
           :icon="card.icon"
           :color="card.color"
-          :amount="card.amount"
+          :amount="card.amount || 0"
         />
       </div>
     </div>
@@ -17,6 +17,15 @@
 </template>
 
 <script setup lang="ts">
+import useFetchCabins from "~/composables/useFetchCabins";
+const { cabins, fetchCabins } = useFetchCabins();
+
+const numberOfCabins = computed(() => cabins.value?.length);
+
+onMounted(() => {
+  fetchCabins();
+});
+
 const cardInfo = reactive([
   {
     title: "Agendamentos",
@@ -27,7 +36,7 @@ const cardInfo = reactive([
   {
     title: "Cabanas",
     icon: "i-heroicons-command-line",
-    amount: 5,
+    amount: numberOfCabins,
     color: "bg-green-500",
   },
   {

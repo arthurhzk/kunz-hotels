@@ -23,14 +23,11 @@
             />
           </svg>
         </div>
-        <input
-          type="text"
-          id="table-search-users"
-          class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Procurar cabana"
-        />
+
+        <USelect v-model="searchValue" :options="searchBy" />
       </div>
     </div>
+
     <table
       class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
     >
@@ -39,13 +36,25 @@
       >
         <tr>
           <th scope="col" class="p-4"></th>
-          <th scope="col" class="px-6 py-3">ID da cabana</th>
-          <th scope="col" class="px-6 py-3">Capacidade</th>
-          <th scope="col" class="px-6 py-3">Desconto</th>
-          <th scope="col" class="px-6 py-3">Valor</th>
+          <th
+            v-for="column in columns"
+            :key="column.id"
+            scope="col"
+            class="px-6 py-3"
+          >
+            {{ column.name }}
+          </th>
         </tr>
       </thead>
-      <tbody v-for="cabin in cabins">
+      <tbody v-if="isLoading">
+        <tr>
+          <td class="w-4 p-4"></td>
+          <td class="px-6 py-4" colspan="4">
+            <Spinner />
+          </td>
+        </tr>
+      </tbody>
+      <tbody v-else v-for="cabin in searchByValue">
         <tr
           class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
         >
@@ -88,9 +97,41 @@
 <script setup lang="ts">
 import useFetchCabins from "~/composables/useFetchCabins";
 
-const { cabins, fetchCabins } = useFetchCabins();
+const { cabins, fetchCabins, isLoading } = useFetchCabins();
 
 onMounted(() => {
   fetchCabins();
+});
+
+const columns = [
+  { id: "cabinId", name: "ID da cabana" },
+  { id: "capacity", name: "Capacidade" },
+  { id: "discount", name: "Desconto" },
+  { id: "value", name: "Valor" },
+];
+
+const searchBy = [
+  "Maior preço",
+  "Menor preço",
+  "Maior desconto",
+  "Maior capacidade",
+  "Menor capacidade",
+];
+
+const searchValue = ref(searchBy[0]);
+
+const searchByValue = computed(() => {
+  switch (searchValue.value) {
+    case "Maior preço":
+      return cabins.value.sort((a, b) => b.regularPrice - a.regularPrice);
+    case "Menor preço":
+      return cabins.value.sort((a, b) => a.regularPrice - b.regularPrice);
+    case "Maior desconto":
+      return cabins.value.sort((a, b) => b.discount - a.discount);
+    case "Maior capacidade":
+      return cabins.value.sort((a, b) => b.maxCapacity - a.maxCapacity);
+    case "Menor capacidade":
+      return cabins.value.sort((a, b) => a.maxCapacity - b.maxCapacity);
+  }
 });
 </script>
