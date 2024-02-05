@@ -1,3 +1,3 @@
 <template>
-  <section>Pesquisa por cliente</section>
+  <section>Agendamentos</section>
 </template>

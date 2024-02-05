@@ -1,26 +1,9 @@
-const useFetchCabins = () => {
-  interface Cabin {
-    id: number;
-    name: string;
-    maxCapacity: number;
-    discount: number;
-    regularPrice: number;
-    image: string;
-  }
+import type { Cabin } from "~/interfaces/cabinType";
 
+const useFetchCabins = () => {
   const isLoading = ref(false);
   const supabase = useSupabaseClient();
   const cabins = ref<Cabin[]>([]);
-
-  const initialState = {
-    name: "",
-    maxCapacity: undefined,
-    discount: undefined,
-    regularPrice: undefined,
-    image: "",
-  };
-
-  const state = reactive(initialState);
 
   const fetchCabins = async () => {
     isLoading.value = true;
@@ -34,15 +17,7 @@ const useFetchCabins = () => {
     }
   };
 
-  const addCabin = async () => {
-    try {
-      await supabase.from("cabins").insert(state);
-    } catch (error) {
-      console.error("Error adding cabin", error);
-    }
-  };
-
-  return { cabins, fetchCabins, isLoading, state, addCabin };
+  return { cabins, fetchCabins, isLoading };
 };
 
 export default useFetchCabins;

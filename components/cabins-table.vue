@@ -63,14 +63,15 @@
               <div
                 class="h-2.5 w-2.5 rounded-full me-2"
                 :class="{
-                  'bg-green-500': cabin.discount > 0,
-                  'bg-red-500': cabin.discount <= 0,
+                  'bg-green-500': cabin.discount && cabin.discount > 0,
+                  'bg-red-500': !cabin.discount || cabin.discount === 0,
                 }"
               ></div>
               {{ cabin.discount }}%
             </div>
           </td>
-          <td class="px-6 py-4">R$ {{ cabin.regularPrice.toFixed(2) }}</td>
+          <td class="px-6 py-4">R$ {{ cabin.regularPrice }}</td>
+          <td><Dropdown /></td>
         </tr>
       </tbody>
     </table>
@@ -81,7 +82,7 @@
 import useFetchCabins from "~/composables/useFetchCabins";
 
 const { cabins, fetchCabins, isLoading } = useFetchCabins();
-
+const {} = useToast();
 onMounted(() => {
   fetchCabins();
 });
@@ -91,6 +92,7 @@ const columns = [
   { id: "capacity", name: "Capacidade" },
   { id: "discount", name: "Desconto" },
   { id: "value", name: "Valor" },
+  { id: "actions", name: "Ações" },
 ];
 
 const searchBy = [
@@ -106,15 +108,23 @@ const searchValue = ref(searchBy[0]);
 const searchByValue = computed(() => {
   switch (searchValue.value) {
     case "Maior preço":
-      return cabins.value.sort((a, b) => b.regularPrice - a.regularPrice);
+      return cabins.value.sort(
+        (a, b) => (b.regularPrice || 0) - (a.regularPrice || 0)
+      );
     case "Menor preço":
-      return cabins.value.sort((a, b) => a.regularPrice - b.regularPrice);
+      return cabins.value.sort(
+        (a, b) => (a.regularPrice || 0) - (b.regularPrice || 0)
+      );
     case "Maior desconto":
-      return cabins.value.sort((a, b) => b.discount - a.discount);
+      return cabins.value.sort((a, b) => (b.discount || 0) - (a.discount || 0));
     case "Maior capacidade":
-      return cabins.value.sort((a, b) => b.maxCapacity - a.maxCapacity);
+      return cabins.value.sort(
+        (a, b) => (b.maxCapacity || 0) - (a.maxCapacity || 0)
+      );
     case "Menor capacidade":
-      return cabins.value.sort((a, b) => a.maxCapacity - b.maxCapacity);
+      return cabins.value.sort(
+        (a, b) => (a.maxCapacity || 0) - (b.maxCapacity || 0)
+      );
   }
 });
 </script>

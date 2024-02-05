@@ -74,8 +74,8 @@ const routePaths = [
   },
 
   {
-    name: "Clientes",
-    route: "/guests",
+    name: "Agendamentos",
+    route: "/bookings",
   },
 
   {

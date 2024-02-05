@@ -1,4 +1,5 @@
 <template>
+  \
   <section>
     <h1
       class="text-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white"
@@ -22,12 +23,14 @@
 
 <script setup lang="ts">
 import useFetchCabins from "~/composables/useFetchCabins";
+import { formatDate } from "~/utils/formatDate";
 const { cabins, fetchCabins } = useFetchCabins();
 
 const numberOfCabins = computed(() => cabins.value?.length);
 
 onMounted(() => {
   fetchCabins();
+  console.log(formatDate(new Date()));
 });
 
 const cardInfo = reactive([

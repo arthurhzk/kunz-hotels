@@ -34,14 +34,10 @@
       <thead
         class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
       >
-        <tr>
+        <tr v-for="column in columns">
           <th scope="col" class="p-4"></th>
-          <th
-            v-for="column in columns"
-            :key="column.id"
-            scope="col"
-            class="px-6 py-3"
-          >
+          <th scope="col" class="p-4"></th>
+          <th :key="column.id" scope="col" class="px-6 py-3">
             {{ column.name }}
           </th>
         </tr>

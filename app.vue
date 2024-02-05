@@ -4,4 +4,5 @@
     <NuxtPage />
     <FooterBar />
   </NuxtLayout>
+  <UNotifications />
 </template>
