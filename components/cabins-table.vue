@@ -71,7 +71,7 @@
             </div>
           </td>
           <td class="px-6 py-4">R$ {{ cabin.regularPrice }}</td>
-          <td><Dropdown /></td>
+          <td><Dropdown @delete="handleDeleteCabin(cabin.id)" /></td>
         </tr>
       </tbody>
     </table>
@@ -81,11 +81,25 @@
 <script setup lang="ts">
 import useFetchCabins from "~/composables/useFetchCabins";
 
-const { cabins, fetchCabins, isLoading } = useFetchCabins();
-const {} = useToast();
+const { cabins, fetchCabins, isLoading, deleteCabins } = useFetchCabins();
+const { toastError, toastSuccess } = useAppToast();
 onMounted(() => {
   fetchCabins();
 });
+
+const handleDeleteCabin = async (id: string) => {
+  try {
+    deleteCabins(id);
+    await fetchCabins();
+    toastSuccess({
+      title: "Cabana removida com sucesso",
+    });
+  } catch (error) {
+    toastError({
+      title: "Erro ao remover cabana",
+    });
+  }
+};
 
 const columns = [
   { id: "cabinId", name: "ID da cabana" },

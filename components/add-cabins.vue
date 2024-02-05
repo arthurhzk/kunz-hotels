@@ -1,7 +1,7 @@
 <template>
   <UForm :state="state" v-bind:schema="schema">
     <div>
-      <UButton label="Adicionar Cabana" @click="isOpen = true" />
+      <UButton color="white" label="Adicionar Cabana" @click="isOpen = true" />
 
       <UModal v-model="isOpen">
         <h1 class="p-4">Adicionar uma Cabana</h1>

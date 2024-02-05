@@ -29,6 +29,8 @@
 
 <script setup lang="ts">
 const isOpenDelete = ref(false);
+const emit = defineEmits(["delete"]);
+
 const items = [
   [
     {
@@ -51,10 +53,7 @@ const items = [
 ];
 
 const confirmDeleteCabin = () => {
-  try {
-    isOpenDelete.value = false;
-  } catch (error) {
-    console.log(error);
-  }
+  emit("delete");
+  isOpenDelete.value = false;
 };
 </script>

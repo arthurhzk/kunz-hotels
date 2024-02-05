@@ -16,8 +16,11 @@ const useFetchCabins = () => {
       console.error("Error fetching cabins", error);
     }
   };
+  const deleteCabins = async (id: string) => {
+    const { error } = await supabase.from("cabins").delete().eq("id", id);
+  };
 
-  return { cabins, fetchCabins, isLoading };
+  return { cabins, fetchCabins, isLoading, deleteCabins };
 };
 
 export default useFetchCabins;
