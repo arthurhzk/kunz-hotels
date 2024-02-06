@@ -31,8 +31,8 @@
 
 <script setup>
 import { z } from "zod";
-const { toastError, toastSuccess } = useAppToast();
-const supabase = useSupabaseClient();
+const { state, addCabin } = useFetchCabins();
+
 const isOpen = ref(false);
 const schema = z.object({
   name: z.string(),
@@ -40,31 +40,4 @@ const schema = z.object({
   discount: z.number().min(0).max(100, "O desconto máximo é de 100%"),
   dailyValue: z.number().min(0, "O valor da diária não pode ser negativo"),
 });
-
-const initialState = {
-  id: undefined,
-  name: "",
-  maxCapacity: undefined,
-  discount: undefined,
-  regularPrice: undefined,
-  image: "",
-};
-const state = ref({ ...initialState });
-const addCabin = async () => {
-  try {
-    await supabase.from("cabins").upsert({ ...state.value });
-    toastSuccess({
-      title: "Cabana adicionada com sucesso",
-    });
-    toastSuccess;
-    isOpen.value = false;
-  } catch (error) {
-    console.error("Error adding cabin", error);
-    toastError({
-      title: "Erro ao adicionar cabana",
-    });
-    isOpen.value = false;
-    toastError;
-  }
-};
 </script>

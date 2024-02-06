@@ -24,13 +24,52 @@
         </div>
       </div>
     </UModal>
+    <UModal v-model="isOpenUpdate">
+      <div class="p-4">
+        <div class="h-64">
+          <h1 class="text-2xl font-bold">Editar</h1>
+
+          <UInput
+            v-model="store.state.maxCapacity"
+            type="number"
+            placeholder="Capacidade"
+            class="mt-4"
+          />
+          <UInput
+            v-model="store.state.discount"
+            type="number"
+            placeholder="Desconto"
+            class="mt-4"
+          />
+          <UInput
+            v-model="store.state.regularPrice"
+            type="number"
+            placeholder="Valor da Diária"
+            class="mt-4"
+          />
+        </div>
+        <div class="flex justify-end mt-4">
+          <UButton
+            color="white"
+            label="Cancelar"
+            class="mr-2"
+            @click="isOpenUpdate = false"
+          />
+          <UButton @click="confirmUpdateCabin" label="Editar" />
+        </div>
+      </div>
+    </UModal>
   </div>
 </template>
 
 <script setup lang="ts">
 const isOpenDelete = ref(false);
-const emit = defineEmits(["delete"]);
-
+const isOpenUpdate = ref(false);
+const emit = defineEmits(["delete", "update"]);
+const { state } = useCabinStore();
+import { useCabinStore } from "~/store/cabins";
+const store = useCabinStore();
+const supabase = useSupabaseClient();
 const items = [
   [
     {
@@ -38,7 +77,7 @@ const items = [
       icon: "i-heroicons-pencil-square-20-solid",
       shortcuts: ["E"],
       click: () => {
-        console.log("Edit");
+        isOpenUpdate.value = true;
       },
     },
     {
@@ -55,5 +94,10 @@ const items = [
 const confirmDeleteCabin = () => {
   emit("delete");
   isOpenDelete.value = false;
+};
+
+const confirmUpdateCabin = async () => {
+  emit("update");
+  isOpenUpdate.value = false;
 };
 </script>

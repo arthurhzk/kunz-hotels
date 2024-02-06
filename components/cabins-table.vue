@@ -71,7 +71,12 @@
             </div>
           </td>
           <td class="px-6 py-4">R$ {{ cabin.regularPrice }}</td>
-          <td><Dropdown @delete="handleDeleteCabin(cabin.id)" /></td>
+          <td>
+            <Dropdown
+              @update="updateValues(cabin.id)"
+              @delete="handleDeleteCabin(cabin.id)"
+            />
+          </td>
         </tr>
       </tbody>
     </table>
@@ -80,8 +85,10 @@
 
 <script setup lang="ts">
 import useFetchCabins from "~/composables/useFetchCabins";
+import { useCabinStore } from "~/store/cabins";
 
 const { cabins, fetchCabins, isLoading, deleteCabins } = useFetchCabins();
+const store = useCabinStore();
 const { toastError, toastSuccess } = useAppToast();
 onMounted(() => {
   fetchCabins();
@@ -141,4 +148,9 @@ const searchByValue = computed(() => {
       );
   }
 });
+
+const updateValues = (id: string) => {
+  store.updateCabin(id);
+  fetchCabins();
+};
 </script>

@@ -4,6 +4,33 @@ const useFetchCabins = () => {
   const isLoading = ref(false);
   const supabase = useSupabaseClient();
   const cabins = ref<Cabin[]>([]);
+  const isOpen = ref(false);
+  const { toastSuccess, toastError } = useAppToast();
+  const initialState = {
+    id: undefined,
+    name: "",
+    maxCapacity: undefined,
+    discount: undefined,
+    regularPrice: undefined,
+    image: "",
+  };
+  const state = ref<Cabin>({ ...initialState });
+  const addCabin = async () => {
+    try {
+      await supabase.from("cabins").upsert({ ...state.value });
+      toastSuccess({
+        title: "Cabana adicionada com sucesso",
+      });
+      toastSuccess;
+      isOpen.value = false;
+    } catch (error) {
+      toastError({
+        title: "Erro ao adicionar cabana",
+      });
+      isOpen.value = false;
+      toastError;
+    }
+  };
 
   const fetchCabins = async () => {
     isLoading.value = true;
@@ -16,11 +43,19 @@ const useFetchCabins = () => {
       console.error("Error fetching cabins", error);
     }
   };
+
   const deleteCabins = async (id: string) => {
-    const { error } = await supabase.from("cabins").delete().eq("id", id);
+    await supabase.from("cabins").delete().eq("id", id);
   };
 
-  return { cabins, fetchCabins, isLoading, deleteCabins };
+  return {
+    cabins,
+    fetchCabins,
+    isLoading,
+    deleteCabins,
+    state,
+    addCabin,
+  };
 };
 
 export default useFetchCabins;
