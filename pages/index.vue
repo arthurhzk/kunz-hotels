@@ -194,17 +194,16 @@ onMounted(() => {
 });
 
 watch(
-  () => {
-    selectedView.value;
-  },
-  (newVal) => {
+  () => selectedView.value,
+  (newVal, oldVal) => {
     fetchBookings(dateBounds.value.start, dateBounds.value.end);
   },
   {
     deep: true,
   }
 );
-watch(() => {
-  filterFetchById.value;
-});
+watch(
+  () => filterFetchById.value,
+  (newVal, oldVal) => {}
+);
 </script>
