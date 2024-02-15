@@ -7,7 +7,7 @@ const useFetchBookings = () => {
       const response = await supabase
         .from("bookings")
         .select(
-          "startDate, endDate, numNights, numGuests, guestId, observations, numGuests, totalPrice"
+          "startDate, endDate, numNights, numGuests, guestId, numGuests, totalPrice, observations"
         )
         .gte("startDate", start.toISOString())
         .lte("endDate", end.toISOString());

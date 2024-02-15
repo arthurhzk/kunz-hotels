@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col gap-2">
-    <UInput v-model="q" placeholder="Filtrar transações..." />
+  <div class="flex flex-col gap-2 mb-4 md:w-1/4">
     <USelect :options="transactionViewOptions" v-model="selectedView" />
+    <UInput v-model="q" placeholder="Filtrar transações..." />
   </div>
 
   <UTable :rows="filteredRows"> </UTable>

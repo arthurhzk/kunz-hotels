@@ -1,11 +1,16 @@
 <template>
-  <USelect :options="transactionViewOptions" v-model="selectedView" />
   <section>
     <h1
       class="text-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white"
     >
       Dashboard
     </h1>
+
+    <USelect
+      class="mx-auto mb-4 md:w-1/2"
+      :options="transactionViewOptions"
+      v-model="selectedView"
+    />
     <div
       class="flex flex-col md:flex-row md:items-center md:justify-center gap-4"
     >
@@ -42,12 +47,6 @@ const cardInfo = reactive([
     icon: "i-heroicons-chart-bar",
     amount: bookingsLength,
     color: "bg-blue-500",
-  },
-  {
-    title: "Cabanas",
-    icon: "i-heroicons-command-line",
-    amount: numberOfCabins,
-    color: "bg-green-500",
   },
   {
     title: "Hóspedes",
