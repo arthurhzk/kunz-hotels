@@ -2,13 +2,7 @@
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <div
       class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900"
-    >
-      <div class="relative">
-        <div class="flex gap-4">
-          <USelect v-model="searchValue" :options="searchBy" />
-        </div>
-      </div>
-    </div>
+    ></div>
 
     <table
       class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
@@ -60,9 +54,9 @@
 
 <script setup lang="ts">
 import useFetchGuests from "~/composables/useFetchGuests";
-
+import useFetchBookings from "~/composables/useFetchBookings";
 const { guests, fetchGuests } = useFetchGuests();
-
+const { bookings, fetchBookings } = useFetchBookings();
 onMounted(() => {
   fetchGuests();
 });
@@ -73,14 +67,4 @@ const columns = [
   { id: "", name: "" },
   { id: "discount", name: "Email" },
 ];
-
-const searchBy = [
-  "Maior preço",
-  "Menor preço",
-  "Maior desconto",
-  "Maior capacidade",
-  "Menor capacidade",
-];
-
-const searchValue = ref(searchBy[0]);
 </script>
