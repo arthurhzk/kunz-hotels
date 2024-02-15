@@ -23,6 +23,9 @@
         />
       </div>
     </div>
+    <div>
+      <GuestsTable />
+    </div>
   </section>
 </template>
 
@@ -31,8 +34,8 @@ import useFetchCabins from "~/composables/useFetchCabins";
 import { ref, computed, reactive, onMounted, watch } from "vue";
 import useFetchBookings from "~/composables/useFetchBookings";
 
-const { cabins, fetchCabins } = useFetchCabins();
-const numberOfCabins = computed(() => cabins.value?.length);
+const { fetchCabins } = useFetchCabins();
+
 const { fetchBookings, bookings } = useFetchBookings();
 const bookingsLength = computed(() => bookings.value.length);
 const numGuests = computed(() =>
