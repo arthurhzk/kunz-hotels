@@ -1,8 +1,8 @@
 export interface Cabin {
   id: string;
   name: string;
-  maxCapacity?: number | undefined;
-  discount?: number | undefined;
-  regularPrice?: number | undefined;
+  maxCapacity: number;
+  discount: number;
+  regularPrice: number;
   image: string;
 }

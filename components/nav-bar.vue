@@ -3,21 +3,12 @@
     <div
       class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
     >
-      <a
-        href="https://flowbite.com/"
-        class="flex items-center space-x-3 rtl:space-x-reverse"
+      <h1
+        class="mb-4 text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white"
       >
-        <img
-          src="https://flowbite.com/docs/images/logo.svg"
-          class="h-8"
-          alt="Flowbite Logo"
-        />
-        <h1
-          class="mb-4 text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white"
-        >
-          Seleção de cabanas
-        </h1>
-      </a>
+        Seleção de cabanas
+      </h1>
+
       <button>
         <svg
           @click="toggleNavBar"

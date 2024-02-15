@@ -66,7 +66,6 @@
 const isOpenDelete = ref(false);
 const isOpenUpdate = ref(false);
 const emit = defineEmits(["delete", "update"]);
-const { state } = useCabinStore();
 import { useCabinStore } from "~/store/cabins";
 const store = useCabinStore();
 const supabase = useSupabaseClient();

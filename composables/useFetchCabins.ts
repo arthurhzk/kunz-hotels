@@ -7,14 +7,14 @@ const useFetchCabins = () => {
   const isOpen = ref(false);
   const { toastSuccess, toastError } = useAppToast();
   const initialState = {
-    id: undefined,
+    id: "",
     name: "",
-    maxCapacity: undefined,
-    discount: undefined,
-    regularPrice: undefined,
+    maxCapacity: null,
+    discount: null,
+    regularPrice: null,
     image: "",
   };
-  const state = ref<Cabin>({ ...initialState });
+  const state = reactive<Cabin>({ ...initialState });
   const addCabin = async () => {
     try {
       await supabase.from("cabins").upsert({ ...state.value });
