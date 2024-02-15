@@ -63,15 +63,5 @@ const routePaths = [
     name: "Cabanas",
     route: "/cabins",
   },
-
-  {
-    name: "Agendamentos",
-    route: "/bookings",
-  },
-
-  {
-    name: "Configurações",
-    route: "/settings",
-  },
 ];
 </script>

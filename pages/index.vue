@@ -5,7 +5,6 @@
     >
       Dashboard
     </h1>
-
     <USelect
       class="mx-auto mb-4 md:w-1/2"
       :options="transactionViewOptions"
@@ -70,6 +69,16 @@
             </td>
             <td class="px-6 py-4"></td>
             <td class="px-6 py-4">{{ guest.email }}</td>
+            <td v-if="guest.numNights > 1" class="px-6 py-4">
+              {{ guest.numGuests }} pessoas
+            </td>
+            <td v-else class="px-6 py-4">{{ guest.numGuests }} pessoa</td>
+            <td v-if="guest.numNights > 1" class="px-6 py-4">
+              {{ guest.numNights }} pessoas
+            </td>
+            <td v-else class="px-6 py-4">{{ guest.numNights }} pessoa</td>
+            <td class="px-6 py-4">{{ guest.startDate }}</td>
+            <td class="px-6 py-4">{{ guest.endDate }}</td>
           </tr>
         </tbody>
       </table>
@@ -95,32 +104,43 @@ const totalPrice = computed(() =>
 const cardInfo = reactive([
   {
     title: "Agendamentos",
-    icon: "i-heroicons-chart-bar",
+    icon: "i-heroicons-book-open",
     amount: bookingsLength,
     color: "bg-blue-500",
   },
   {
     title: "Hóspedes",
-    icon: "i-heroicons-command-line",
+    icon: "i-heroicons-user",
     amount: numGuests,
     color: "bg-yellow-500",
   },
   {
     title: "Valor total",
-    icon: "i-heroicons-command-line",
+    icon: "i-heroicons-currency-dollar",
     amount: totalPrice,
-    color: "bg-red-500",
+    color: "bg-green-500",
   },
 ]);
 
-const transactionViewOptions = ["Anual", "Mensal", "Diário"];
+const transactionViewOptions = [
+  "Anual",
+  "Mensal",
+  "Diário",
+  "Próximos 7 dias",
+  "Próximos 90 dias",
+];
 const columns = [
   { id: "cabinId", name: "Nome Completo" },
   { id: "capacity", name: "País" },
   { id: "", name: "" },
   { id: "discount", name: "Email" },
+  { id: "numGuests", name: "Número de Hóspedes" },
+  { id: "numNights", name: "Número de noites" },
+  { id: "checkIn", name: "Check in" },
+  { id: "checkOut", name: "Check out" },
 ];
 const selectedView = ref(transactionViewOptions[1]);
+
 const dateBounds = computed(() => {
   switch (selectedView.value) {
     case "Anual":
@@ -138,19 +158,39 @@ const dateBounds = computed(() => {
         start: new Date(),
         end: new Date(),
       };
+    case "Próximos 7 dias":
+      return {
+        start: new Date(),
+        end: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
+      };
+    case "Próximos 90 dias":
+      return {
+        start: new Date(),
+        end: new Date(new Date().getTime() + 90 * 24 * 60 * 60 * 1000),
+      };
   }
 });
 
 const filterFetchById = computed(() => {
   const bookingsId = bookings.value.map((booking) => booking.guestId);
-  return guests.value.filter((guest) => bookingsId.includes(guest.id));
-});
+  const guestsId = guests.value.filter((guest) =>
+    bookingsId.includes(guest.id)
+  );
 
+  const glue = bookings.value.map((booking) => {
+    const guest = guestsId.find((guest) => guest.id === booking.guestId);
+    return {
+      ...booking,
+      ...guest,
+    };
+  });
+
+  return glue;
+});
 onMounted(() => {
   fetchBookings(dateBounds.value.start, dateBounds.value.end);
   fetchCabins();
   fetchGuests();
-  console.log(filterFetchById);
 });
 
 watch(
