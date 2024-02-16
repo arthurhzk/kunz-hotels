@@ -22,6 +22,7 @@
             type="number"
             placeholder="Valor da Diária"
           />
+          <UInput type="date" />
           <UButton @click="addCabin" type="submit" label="Adicionar " />
         </div>
       </UModal>

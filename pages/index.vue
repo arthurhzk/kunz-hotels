@@ -5,11 +5,7 @@
     >
       Dashboard
     </h1>
-    <USelect
-      class="mx-auto mb-4 md:w-1/2"
-      :options="transactionViewOptions"
-      v-model="selectedView"
-    />
+
     <div
       class="flex flex-col md:flex-row md:items-center md:justify-center gap-4"
     >
@@ -21,6 +17,14 @@
           :amount="card.amount || 0"
         />
       </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <CheckIn />
+      <USelect
+        class="my-4 md:w-1/4"
+        :options="transactionViewOptions"
+        v-model="selectedView"
+      />
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div

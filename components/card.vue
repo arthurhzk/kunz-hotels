@@ -1,6 +1,6 @@
 <template>
   <UCard>
-    <div class="h-32 bg-gray-800 flex rounded-md">
+    <div class="h-32 dark:bg-gray-800 bg-slate-50 flex rounded-md">
       <div class="flex items-center gap-4 p-10">
         <span
           :class="props.color"
@@ -10,7 +10,7 @@
         </span>
         <div>
           <p class="text-gray-500">{{ props.title }}</p>
-          <p class="text-gray-100">{{ props.amount }}</p>
+          <p class="text-gray-500">{{ props.amount }}</p>
         </div>
       </div>
     </div>

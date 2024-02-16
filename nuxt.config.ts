@@ -1,6 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxt/ui", "@nuxtjs/supabase", "@pinia/nuxt"],
+  modules: [
+    "@nuxt/ui",
+    "@nuxtjs/supabase",
+    "@pinia/nuxt",
+    "@samk-dev/nuxt-vcalendar",
+  ],
   devtools: { enabled: true },
   supabase: {
     redirect: false,

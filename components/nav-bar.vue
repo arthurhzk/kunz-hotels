@@ -6,7 +6,7 @@
       <h1
         class="mb-4 text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white"
       >
-        Seleção de cabanas
+        Painel - Nasty Funk Hotel
       </h1>
 
       <button>
@@ -33,7 +33,7 @@
         id="navbar-default"
       >
         <ul
-          class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
+          class="font-medium flex flex-col items-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
         >
           <li v-for="(path, index) in routePaths" :key="index">
             <NuxtLink
@@ -42,6 +42,7 @@
               >{{ path.name }}</NuxtLink
             >
           </li>
+          <DarkMode />
         </ul>
       </div>
     </div>

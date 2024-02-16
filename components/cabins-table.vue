@@ -4,7 +4,7 @@
       class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900"
     >
       <div class="relative">
-        <div class="flex gap-4">
+        <div class="flex gap-4 mt-4">
           <addCabins />
           <USelect v-model="searchValue" :options="searchBy" />
         </div>
