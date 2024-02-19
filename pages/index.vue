@@ -59,11 +59,6 @@
               scope="row"
               class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
             >
-              <img
-                class="w-10 h-10 rounded-full"
-                :src="guest.countryFlag"
-                alt="Jese image"
-              />
               <div class="ps-3">
                 <div class="text-base font-semibold">{{ guest.fullName }}</div>
               </div>
@@ -78,9 +73,9 @@
             </td>
             <td v-else class="px-6 py-4">{{ guest.numGuests }} pessoa</td>
             <td v-if="guest.numNights > 1" class="px-6 py-4">
-              {{ guest.numNights }} pessoas
+              {{ guest.numNights }} noites
             </td>
-            <td v-else class="px-6 py-4">{{ guest.numNights }} pessoa</td>
+            <td v-else class="px-6 py-4">{{ guest.numNights }} noite</td>
             <td class="px-6 py-4">{{ guest.startDate }}</td>
             <td class="px-6 py-4">{{ guest.endDate }}</td>
           </tr>
